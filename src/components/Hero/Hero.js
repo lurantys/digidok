@@ -28,12 +28,22 @@ export default function Hero() {
         transition={{ duration: 1.1 }}
         className="flex flex-col sm:flex-row gap-6 justify-center"
       >
-        <button className="px-10 py-4 rounded-lg bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40">
+        <motion.button
+          whileHover={{ scale: 1.06, boxShadow: "0 4px 24px 0 rgba(255,255,255,0.08)" }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: 'tween', duration: 0.13 }}
+          className="px-10 py-4 rounded-lg bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40"
+        >
           {t("hero.cta.primary")}
-        </button>
-        <button className="px-10 py-4 rounded-lg border border-white text-white font-semibold text-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/20">
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.06, boxShadow: "0 4px 24px 0 rgba(255,255,255,0.08)" }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: 'tween', duration: 0.13 }}
+          className="px-10 py-4 rounded-lg border border-white text-white font-semibold text-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+        >
           {t("hero.cta.secondary")}
-        </button>
+        </motion.button>
       </motion.div>
       <motion.div
         className="hidden md:flex flex-col items-center absolute left-1/2 -translate-x-1/2 bottom-8 z-20"

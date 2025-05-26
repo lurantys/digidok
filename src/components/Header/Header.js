@@ -1,6 +1,7 @@
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -29,22 +30,26 @@ export default function Header() {
       </nav>
       <div className="flex items-center gap-4">
         <LanguageToggle />
-        <Link
-          to="/auth"
-          state={{ mode: "login" }}
-          onClick={handleAuthNav("login")}
-          className="px-5 py-2 rounded-md text-white font-semibold hover:bg-white/10 transition-colors"
-        >
-          {t("header.login")}
-        </Link>
-        <Link
-          to="/auth"
-          state={{ mode: "signup" }}
-          onClick={handleAuthNav("signup")}
-          className="px-5 py-2 rounded-md bg-white text-black font-semibold hover:bg-gray-200 transition-colors ml-2"
-        >
-          {t("header.cta")}
-        </Link>
+        <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }} className="inline-block">
+          <Link
+            to="/auth"
+            state={{ mode: "login" }}
+            onClick={handleAuthNav("login")}
+            className="px-5 py-2 rounded-md text-white font-semibold hover:bg-white/10 transition-colors"
+          >
+            {t("header.login")}
+          </Link>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }} className="inline-block">
+          <Link
+            to="/auth"
+            state={{ mode: "signup" }}
+            onClick={handleAuthNav("signup")}
+            className="px-5 py-2 rounded-md bg-white text-black font-semibold hover:bg-gray-200 transition-colors ml-2"
+          >
+            {t("header.cta")}
+          </Link>
+        </motion.div>
       </div>
     </header>
   );

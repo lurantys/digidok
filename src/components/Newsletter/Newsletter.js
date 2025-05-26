@@ -49,12 +49,15 @@ export default function Newsletter() {
             required
             aria-label={t("newsletter.placeholder")}
           />
-          <button
+          <motion.button
             type="submit"
+            whileHover={{ scale: 1.06, boxShadow: "0 4px 24px 0 rgba(255,255,255,0.08)" }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'tween', duration: 0.13 }}
             className="px-8 py-3 rounded-md bg-white text-black font-semibold hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
           >
             {t("newsletter.cta")}
-          </button>
+          </motion.button>
         </form>
       )}
       {error && <div className="text-red-400 mt-2 text-sm">{error}</div>}

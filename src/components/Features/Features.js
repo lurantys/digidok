@@ -66,7 +66,9 @@ export default function Features() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.1, type: 'tween', duration: 0.13 }}
+            whileHover={{ scale: 1.04, boxShadow: "0 4px 24px 0 rgba(37,99,235,0.10)" }}
+            whileTap={{ scale: 0.97 }}
             className="flex flex-col items-center bg-gradient-to-b from-white/5 to-black/80 border border-white/10 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow min-h-[220px] backdrop-blur"
           >
             <div className="mb-4">{f.icon}</div>
@@ -89,7 +91,9 @@ export default function Features() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.1, type: 'tween', duration: 0.13 }}
+            whileHover={{ scale: 1.04, boxShadow: "0 4px 24px 0 rgba(37,99,235,0.10)" }}
+            whileTap={{ scale: 0.97 }}
             className="flex flex-col items-center bg-black/80 border border-white/10 rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow min-h-[160px] backdrop-blur"
           >
             <div className="mb-3">{a.icon}</div>
