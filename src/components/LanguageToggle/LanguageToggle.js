@@ -2,6 +2,7 @@ import { useLanguage } from "../../hooks/useLanguage";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import FlagIcon from "./FlagIcon";
 
 export default function LanguageToggle() {
   const { language, toggleLanguage } = useLanguage();
@@ -9,7 +10,6 @@ export default function LanguageToggle() {
   const [loading, setLoading] = useState(false);
 
   const targetLang = language === "en" ? "fr" : "en";
-  const targetFlag = targetLang === "en" ? "🇬🇧" : "🇫🇷";
 
   const handleToggle = () => {
     setLoading(true);
@@ -52,7 +52,7 @@ export default function LanguageToggle() {
               transition={{ duration: 0.25 }}
               className="text-lg"
             >
-              {targetFlag}
+              <FlagIcon lang={targetLang} />
             </motion.span>
             <motion.span
               key={targetLang + "-code"}
