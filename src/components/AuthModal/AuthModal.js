@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function AuthModal({ page }) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [name, setName] = useState("");
@@ -49,8 +47,8 @@ export default function AuthModal({ page }) {
 
   const validate = () => {
     if (isSignup && !name.trim()) return "Name is required";
-    if (!/.+@.+\..+/.test(email)) return t("Invalid email");
-    if (password.length < 6) return t("Password too short");
+    if (!/.+@.+\..+/.test(email)) return "Invalid email";
+    if (password.length < 6) return "Password too short";
     return "";
   };
 
@@ -132,14 +130,14 @@ export default function AuthModal({ page }) {
             className="bg-black/90 border border-white/10 shadow-2xl p-12 w-full max-w-md relative animate-fadeIn mt-10 flex flex-col items-center z-10 rounded-2xl backdrop-blur"
           >
             <h2 className="text-3xl font-heading font-bold mb-2 text-center text-white">
-              {isSignup ? t("header.cta") : t("header.login")}
+              {isSignup ? "Sign Up" : "Log In"}
             </h2>
             <p className="text-white/60 mb-8 text-center text-base">
               {isSignup ? "Create your Digidok account" : "Welcome back to Digidok"}
             </p>
             {submitted ? (
               <div className="text-green-400 font-semibold text-lg text-center mb-4">
-                {isSignup ? t("Signed up successfully!") : t("Logged in successfully!")}
+                {isSignup ? "Signed up successfully!" : "Logged in successfully!"}
               </div>
             ) : (
               <form className="flex flex-col gap-6 w-full" onSubmit={handleSubmit} noValidate>
@@ -157,27 +155,27 @@ export default function AuthModal({ page }) {
                 <input
                   type="email"
                   className="px-4 py-3 rounded-md border border-white/20 bg-black text-white placeholder-white/40 focus:border-blue-500 focus:ring-2 focus:ring-blue-900 outline-none text-base"
-                  placeholder={t("newsletter.placeholder")}
+                  placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  aria-label={t("newsletter.placeholder")}
+                  aria-label="Email address"
                 />
                 <input
                   type="password"
                   className="px-4 py-3 rounded-md border border-white/20 bg-black text-white placeholder-white/40 focus:border-blue-500 focus:ring-2 focus:ring-blue-900 outline-none text-base"
-                  placeholder={t("Password")}
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  aria-label={t("Password")}
+                  aria-label="Password"
                 />
                 {error && <div className="text-red-400 text-sm">{error}</div>}
                 <button
                   type="submit"
                   className="px-6 py-3 rounded-md bg-blue-700 text-white font-semibold text-lg hover:bg-blue-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-700 mt-2 shadow"
                 >
-                  {isSignup ? t("header.cta") : t("header.login")}
+                  {isSignup ? "Sign Up" : "Log In"}
                 </button>
               </form>
             )}
@@ -214,38 +212,38 @@ export default function AuthModal({ page }) {
           ×
         </button>
         <h2 className="text-2xl font-heading font-bold text-white mb-6 text-center">
-          {isSignup ? t("header.cta") : t("header.login")}
+          {isSignup ? "Sign Up" : "Log In"}
         </h2>
         {submitted ? (
           <div className="text-green-400 font-semibold text-lg text-center mb-4">
-            {isSignup ? t("Signed up successfully!") : t("Logged in successfully!")}
+            {isSignup ? "Signed up successfully!" : "Logged in successfully!"}
           </div>
         ) : (
           <form className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
             <input
               type="email"
               className="px-4 py-3 rounded-md border border-white bg-black text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white outline-none text-base"
-              placeholder={t("newsletter.placeholder")}
+              placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              aria-label={t("newsletter.placeholder")}
+              aria-label="Email address"
             />
             <input
               type="password"
               className="px-4 py-3 rounded-md border border-white bg-black text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white outline-none text-base"
-              placeholder={t("Password")}
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              aria-label={t("Password")}
+              aria-label="Password"
             />
             {error && <div className="text-red-400 text-sm">{error}</div>}
             <button
               type="submit"
               className="px-6 py-3 rounded-md bg-white text-black font-semibold hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white mt-2"
             >
-              {isSignup ? t("header.cta") : t("header.login")}
+              {isSignup ? "Sign Up" : "Log In"}
             </button>
           </form>
         )}

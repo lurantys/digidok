@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getRandomQuestions, calculateScore, formatTime } from '../utils/quizUtils';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const Quiz = ({ onComplete }) => {
-  const { t } = useLanguage();
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
@@ -52,18 +50,18 @@ const Quiz = ({ onComplete }) => {
   };
 
   if (questions.length === 0) {
-    return <div className="text-center p-4">{t('common.loading')}</div>;
+    return <div className="text-center p-4">Loading...</div>;
   }
 
   if (showResults) {
     const results = calculateScore(answers, questions);
     return (
       <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">{t('quiz.results')}</h2>
+        <h2 className="text-2xl font-bold mb-4">Quiz Results</h2>
         <div className="space-y-4">
-          <p className="text-lg">{t('quiz.score')}: {results.score} {t('quiz.points')}</p>
-          <p className="text-lg">{t('quiz.correctAnswers')}: {results.correctAnswers}/{results.totalQuestions}</p>
-          <p className="text-lg">{t('quiz.percentage')}: {results.percentage.toFixed(1)}%</p>
+          <p className="text-lg">Score: {results.score} points</p>
+          <p className="text-lg">Correct Answers: {results.correctAnswers}/{results.totalQuestions}</p>
+          <p className="text-lg">Percentage: {results.percentage.toFixed(1)}%</p>
         </div>
       </div>
     );
@@ -75,10 +73,10 @@ const Quiz = ({ onComplete }) => {
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold">
-          {t('quiz.question')} {currentQuestion + 1} {t('common.of')} {questions.length}
+          Question {currentQuestion + 1} of {questions.length}
         </h2>
         <div className="text-lg font-medium">
-          {t('quiz.timeLeft')}: {formatTime(timeLeft)}
+          Time Left: {formatTime(timeLeft)}
         </div>
       </div>
 
@@ -103,7 +101,7 @@ const Quiz = ({ onComplete }) => {
 
       <div className="flex justify-between items-center">
         <div className="text-sm text-gray-500">
-          {t('quiz.difficulty')}: {t(`quiz.${question.difficulty}`)}
+          Difficulty: {question.difficulty}
         </div>
         <button
           className={`px-6 py-2 rounded-lg ${
@@ -114,7 +112,7 @@ const Quiz = ({ onComplete }) => {
           onClick={handleNext}
           disabled={selectedAnswer === null}
         >
-          {currentQuestion === questions.length - 1 ? t('quiz.finishQuiz') : t('quiz.nextQuestion')}
+          {currentQuestion === questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
         </button>
       </div>
     </div>

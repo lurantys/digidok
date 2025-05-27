@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { useLanguage } from "../contexts/LanguageContext";
 
 const quizQuestions = [
   // Basic Concepts (30% - 4 questions)
@@ -211,7 +210,6 @@ function AnimatedBackground({ xBlueStyle, yBlueStyle, xGreenStyle, yGreenStyle }
 
 export default function Quiz() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5, px: 0, py: 0 });
   const containerRef = useRef(null);
   const x = useMotionValue(window.innerWidth / 2);
@@ -249,20 +247,12 @@ export default function Quiz() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // Calculate difficulty level based on score
   const getDifficultyLevel = (score) => {
-    const percentage = (score / quizQuestions.length) * 100;
-    if (percentage <= 40) return t('quiz.difficulty.easy');
-    if (percentage <= 65) return t('quiz.difficulty.medium');
-    if (percentage <= 80) return t('quiz.difficulty.hard');
-    return t('quiz.difficulty.expert');
+    if (score >= 90) return "Expert";
+    if (score >= 70) return "Advanced";
+    if (score >= 50) return "Intermediate";
+    return "Beginner";
   };
-
-  // Blobs follow cursor in px
-  const xBlueStyle = useTransform(x, v => `${v - 304}px`); // 304 = 38rem/2
-  const yBlueStyle = useTransform(y, v => `${v - 304}px`);
-  const xGreenStyle = useTransform(xGreen, v => `${v - 240}px`); // 240 = 30rem/2
-  const yGreenStyle = useTransform(yGreen, v => `${v - 240}px`);
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
@@ -272,17 +262,12 @@ export default function Quiz() {
     setMouse({ x: px / rect.width, y: py / rect.height, px, py });
     x.set(px);
     y.set(py);
-    // For green, mirror horizontally and vertically
     xGreen.set(rect.width - px);
     yGreen.set(rect.height - py);
   };
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
-    setCurrentQuestion(0);
-    setScore(0);
-    setShowResults(false);
-    setTimeLeft(300);
     setTimerActive(true);
   };
 
@@ -292,11 +277,11 @@ export default function Quiz() {
 
   const handleNextQuestion = () => {
     if (selectedAnswer === quizQuestions[currentQuestion].correctAnswer) {
-      setScore(score + 1);
+      setScore(prev => prev + 1);
     }
 
     if (currentQuestion < quizQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion(prev => prev + 1);
       setSelectedAnswer(null);
     } else {
       setShowResults(true);
@@ -311,118 +296,111 @@ export default function Quiz() {
     setScore(0);
     setShowResults(false);
     setTimeLeft(300);
+    setTimerActive(false);
   };
 
   const renderQuizContent = () => {
     if (!quizStarted) {
       return (
-        <>
-          <h1 className="text-3xl font-heading font-bold text-white mb-6 text-center">
-            {t('quiz.title')}
-          </h1>
-          <p className="text-white/60 text-center mb-8">
-            {t('quiz.description')}
+        <div className="text-center">
+          <h1 className="text-4xl font-heading font-bold text-white mb-6">AI in Healthcare Quiz</h1>
+          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+            Test your knowledge of AI applications in healthcare with our comprehensive quiz.
+            You'll have 5 minutes to complete 13 questions covering various aspects of healthcare AI.
           </p>
-          
-          <div className="space-y-4">
-            <button
-              onClick={handleStartQuiz}
-              className="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
-            >
-              {t('quiz.startQuiz')}
-            </button>
-            <button
-              onClick={() => navigate("/quizzes")}
-              className="w-full py-3 px-6 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
-            >
-              {t('quiz.backToQuizzes')}
-            </button>
-          </div>
-        </>
+          <button
+            onClick={handleStartQuiz}
+            className="px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            Start Quiz
+          </button>
+        </div>
       );
     }
 
     if (showResults) {
-      const difficultyLevel = getDifficultyLevel(score);
+      const percentage = (score / quizQuestions.length) * 100;
+      const difficultyLevel = getDifficultyLevel(percentage);
+
       return (
-        <>
-          <h1 className="text-3xl font-heading font-bold text-white mb-6 text-center">
-            {t('quiz.results')}
-          </h1>
-          <div className="text-center mb-8">
-            <p className="text-white/60 mb-2">
-              {t('quiz.score')}: {score} {t('quiz.outOf')} {quizQuestions.length}
-            </p>
-            <p className="text-xl font-semibold text-white">
-              {t('quiz.level')}: {difficultyLevel}
-            </p>
+        <div className="text-center">
+          <h2 className="text-3xl font-heading font-bold text-white mb-6">Quiz Results</h2>
+          <div className="space-y-4 text-white/80">
+            <p className="text-xl">Score: {score} out of {quizQuestions.length}</p>
+            <p className="text-xl">Percentage: {percentage.toFixed(1)}%</p>
+            <p className="text-xl">Difficulty Level: {difficultyLevel}</p>
           </div>
-          <div className="space-y-4">
+          <div className="mt-8 space-x-4">
             <button
               onClick={handleRestartQuiz}
-              className="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
             >
-              {t('quiz.tryAgain')}
+              Try Again
             </button>
             <button
-              onClick={() => navigate("/quizzes")}
-              className="w-full py-3 px-6 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
+              onClick={() => navigate("/")}
+              className="px-6 py-3 bg-transparent text-white font-semibold rounded-lg border border-white hover:bg-white/10 transition-colors"
             >
-              {t('quiz.backToQuizzes')}
+              Back to Home
             </button>
           </div>
-        </>
+        </div>
       );
     }
 
     const question = quizQuestions[currentQuestion];
+
     return (
-      <>
-        <div className="flex justify-between items-center mb-6">
-          <div className="text-white/40 text-sm">
-            {t('quiz.question')} {currentQuestion + 1} {t('common.of')} {quizQuestions.length}
+      <div className="max-w-3xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <div className="text-white/60">
+            Question {currentQuestion + 1} of {quizQuestions.length}
           </div>
-          <div className="text-white/40 text-sm">
-            {t('quiz.timeLeft')}: {formatTime(timeLeft)}
+          <div className="text-white/60">
+            Time Left: {formatTime(timeLeft)}
           </div>
         </div>
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-xl font-semibold text-white">
-              {question.question}
-            </h2>
-            <span className="text-sm text-white/40">
-              {t(`quiz.difficulty.${question.difficulty.toLowerCase()}`)}
-            </span>
-          </div>
-          <div className="space-y-3">
+
+        <div className="bg-white/5 border border-white/10 rounded-xl p-8 backdrop-blur">
+          <h3 className="text-xl font-semibold text-white mb-6">{question.question}</h3>
+          <div className="space-y-4">
             {question.options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
-                className={`w-full text-left p-4 rounded-lg transition-colors ${
+                className={`w-full p-4 text-left rounded-lg border transition-colors ${
                   selectedAnswer === index
-                    ? "bg-blue-500 text-white"
-                    : "bg-white/5 hover:bg-white/10 text-white/80"
+                    ? "bg-white/10 border-white/30"
+                    : "border-white/10 hover:bg-white/5"
                 }`}
               >
-                {option}
+                <span className="text-white/80">{option}</span>
               </button>
             ))}
           </div>
         </div>
-        <button
-          onClick={handleNextQuestion}
-          disabled={selectedAnswer === null}
-          className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
-            selectedAnswer === null
-              ? "bg-white/10 text-white/40 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600 text-white"
-          }`}
-        >
-          {currentQuestion === quizQuestions.length - 1 ? t('quiz.finishQuiz') : t('quiz.nextQuestion')}
-        </button>
-      </>
+
+        <div className="mt-8 flex justify-between items-center">
+          <button
+            onClick={() => navigate("/")}
+            className="text-white/60 hover:text-white flex items-center gap-2"
+          >
+            <ArrowLeftIcon className="w-5 h-5" />
+            Back to Home
+          </button>
+          <button
+            onClick={handleNextQuestion}
+            disabled={selectedAnswer === null}
+            className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+              selectedAnswer === null
+                ? "bg-white/10 text-white/40 cursor-not-allowed"
+                : "bg-white text-black hover:bg-gray-200"
+            }`}
+          >
+            {currentQuestion === quizQuestions.length - 1 ? "Finish Quiz" : "Next Question"}
+          </button>
+        </div>
+      </div>
     );
   };
 
@@ -433,29 +411,13 @@ export default function Quiz() {
       className="min-h-screen bg-black relative overflow-hidden"
     >
       <AnimatedBackground
-        xBlueStyle={xBlueStyle}
-        yBlueStyle={yBlueStyle}
-        xGreenStyle={xGreenStyle}
-        yGreenStyle={yGreenStyle}
+        xBlueStyle={useTransform(x, v => `${v - 304}px`)}
+        yBlueStyle={useTransform(y, v => `${v - 304}px`)}
+        xGreenStyle={useTransform(xGreen, v => `${v - 240}px`)}
+        yGreenStyle={useTransform(yGreen, v => `${v - 240}px`)}
       />
-      
-      <button
-        onClick={() => navigate("/quizzes")}
-        className="absolute top-6 left-6 text-white/60 hover:text-white text-2xl font-bold z-10"
-        aria-label={t('common.back')}
-      >
-        <ArrowLeftIcon className="w-8 h-8" />
-      </button>
-
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl w-full bg-black/90 border border-white/10 rounded-2xl p-8 shadow-2xl backdrop-blur"
-        >
-          {renderQuizContent()}
-        </motion.div>
+      <div className="relative z-10 container mx-auto px-4 py-16">
+        {renderQuizContent()}
       </div>
     </div>
   );

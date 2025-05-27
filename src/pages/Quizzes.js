@@ -1,11 +1,8 @@
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { AcademicCapIcon } from "@heroicons/react/24/outline";
 
 export default function Quizzes() {
-  const { t } = useTranslation();
-  
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <motion.div

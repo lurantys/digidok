@@ -1,10 +1,8 @@
-import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Footer({ transparent, separator }) {
-  const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   // Hooks must always be called
@@ -24,7 +22,7 @@ export default function Footer({ transparent, separator }) {
       )}
       <footer className="w-full bg-black text-white py-10 px-4 flex items-center justify-center text-sm relative z-10">
         <div className="text-center w-full">
-          {t("footer.copyright", { year })}
+          © {year} DigiDok. All rights reserved.
         </div>
       </footer>
       <AnimatePresence>

@@ -1,11 +1,8 @@
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
-  const { t } = useTranslation();
-
   return (
     <section className="w-full flex flex-col items-center justify-center text-center py-28 px-4 bg-black relative">
       <motion.h1
@@ -14,7 +11,7 @@ export default function Hero() {
         transition={{ duration: 0.7 }}
         className="text-4xl md:text-6xl font-heading font-bold text-white mb-6"
       >
-        {t("hero.headline")}
+        Master Digital Skills with Interactive Learning
       </motion.h1>
       <motion.p
         initial={{ opacity: 0, y: 30 }}
@@ -22,7 +19,7 @@ export default function Hero() {
         transition={{ duration: 0.9 }}
         className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto"
       >
-        {t("hero.subtitle")}
+        Take our interactive quizzes to test your knowledge and learn at your own pace
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -37,7 +34,7 @@ export default function Hero() {
             transition={{ type: 'tween', duration: 0.13 }}
             className="px-10 py-4 rounded-lg bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40"
           >
-            {t("hero.cta.primary")}
+            Start Learning
           </motion.button>
         </Link>
       </motion.div>

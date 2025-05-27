@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { BookOpen, Brain, Route } from "lucide-react";
 import { AcademicCapIcon, UserGroupIcon, UserIcon, BeakerIcon } from "@heroicons/react/24/outline";
@@ -6,64 +5,63 @@ import { Link } from "react-router-dom";
 
 const features = [
   {
-    icon: <BookOpen className="w-8 h-8 text-blue-400" />, // Articles
-    titleKey: "features.articles",
-    descKey: "features.articlesDesc"
+    icon: <BookOpen className="w-8 h-8 text-blue-400" />,
+    title: "Articles",
+    description: "Access comprehensive articles on AI and healthcare topics"
   },
   {
-    icon: <Link to="/quiz"><AcademicCapIcon className="w-8 h-8 text-blue-400" /></Link>, // Quiz
-    titleKey: "features.quiz",
-    descKey: "features.quizDesc"
+    icon: <Link to="/quiz"><AcademicCapIcon className="w-8 h-8 text-blue-400" /></Link>,
+    title: "Interactive Quizzes",
+    description: "Test your knowledge with our engaging quiz system"
   },
   {
-    icon: <Route className="w-8 h-8 text-blue-400" />, // Roadmaps
-    titleKey: "features.roadmaps",
-    descKey: "features.roadmapsDesc"
+    icon: <Route className="w-8 h-8 text-blue-400" />,
+    title: "Learning Roadmaps",
+    description: "Follow structured paths to master key concepts"
   },
   {
-    icon: <Brain className="w-8 h-8 text-blue-400" />, // Expertise
-    titleKey: "features.expertise",
-    descKey: "features.expertiseDesc"
+    icon: <Brain className="w-8 h-8 text-blue-400" />,
+    title: "Expert Knowledge",
+    description: "Learn from industry experts and professionals"
   },
 ];
 
 const audiences = [
   {
     icon: <UserIcon className="w-7 h-7 text-green-400" />,
-    labelKey: "audience.doctors",
-    descKey: "audience.doctorsDesc"
+    label: "Doctors",
+    description: "Stay updated with the latest medical AI advancements"
   },
   {
     icon: <AcademicCapIcon className="w-7 h-7 text-blue-400" />,
-    labelKey: "audience.students",
-    descKey: "audience.studentsDesc"
+    label: "Students",
+    description: "Build a strong foundation in healthcare AI"
   },
   {
     icon: <BeakerIcon className="w-7 h-7 text-purple-400" />,
-    labelKey: "audience.researchers",
-    descKey: "audience.researchersDesc"
+    label: "Researchers",
+    description: "Access cutting-edge research and methodologies"
   },
   {
     icon: <UserGroupIcon className="w-7 h-7 text-pink-400" />,
-    labelKey: "audience.teams",
-    descKey: "audience.teamsDesc"
+    label: "Teams",
+    description: "Collaborate and learn together effectively"
   },
 ];
 
 export default function Features() {
-  const { t } = useTranslation();
   return (
     <section className="w-full py-20 px-4 bg-black">
       <h2 className="text-3xl md:text-4xl font-heading font-bold text-center text-white mb-4">
-        {t("features.whatWeOffer", "What We Offer")}
+        What We Offer
       </h2>
       <p className="text-center text-white/60 mb-14 max-w-2xl mx-auto">
-        {t("features.intro", "Explore our platform's core features designed to help you master AI in healthcare.")}
+        Explore our platform's core features designed to help you master AI in healthcare.
       </p>
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-16">
         {features.map((f, i) => (
           <motion.div
-            key={f.titleKey}
+            key={f.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -74,21 +72,21 @@ export default function Features() {
           >
             <div className="mb-4">{f.icon}</div>
             <div className="text-lg font-semibold text-white mb-1 text-center">
-              {t(f.titleKey)}
+              {f.title}
             </div>
             <div className="text-sm text-white/60 text-center mt-2">
-              {t(f.descKey)}
+              {f.description}
             </div>
           </motion.div>
         ))}
       </div>
       <h3 className="text-2xl md:text-3xl font-heading font-bold text-center text-white mb-8">
-        {t("features.whoFor", "Who is Digidok for?")}
+        Who is Digidok for?
       </h3>
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {audiences.map((a, i) => (
           <motion.div
-            key={a.labelKey}
+            key={a.label}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -99,10 +97,10 @@ export default function Features() {
           >
             <div className="mb-3">{a.icon}</div>
             <div className="text-base font-semibold text-white mb-1 text-center">
-              {t(a.labelKey)}
+              {a.label}
             </div>
             <div className="text-xs text-white/60 text-center mt-1">
-              {t(a.descKey)}
+              {a.description}
             </div>
           </motion.div>
         ))}

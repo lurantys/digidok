@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
 export default function Newsletter() {
-  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -29,9 +27,11 @@ export default function Newsletter() {
       className="w-full py-20 px-4 bg-black flex flex-col items-center"
     >
       <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4 text-center">
-        {t("newsletter.title")}
+        Stay Updated
       </h3>
-      <p className="text-white/80 mb-8 text-center max-w-xl">{t("newsletter.subtitle")}</p>
+      <p className="text-white/80 mb-8 text-center max-w-xl">
+        Subscribe to our newsletter for the latest updates on AI in healthcare
+      </p>
       {submitted ? (
         <div className="text-green-400 font-semibold text-lg mb-4">Thank you for subscribing!</div>
       ) : (
@@ -43,11 +43,11 @@ export default function Newsletter() {
           <input
             type="email"
             className="flex-1 px-4 py-3 rounded-md border border-white bg-black text-white placeholder-white/60 focus:border-white focus:ring-2 focus:ring-white outline-none text-base"
-            placeholder={t("newsletter.placeholder")}
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            aria-label={t("newsletter.placeholder")}
+            aria-label="Enter your email"
           />
           <motion.button
             type="submit"
@@ -56,12 +56,14 @@ export default function Newsletter() {
             transition={{ type: 'tween', duration: 0.13 }}
             className="px-8 py-3 rounded-md bg-white text-black font-semibold hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
           >
-            {t("newsletter.cta")}
+            Subscribe
           </motion.button>
         </form>
       )}
       {error && <div className="text-red-400 mt-2 text-sm">{error}</div>}
-      <div className="text-xs text-white/60 mt-6 max-w-xs text-center">{t("newsletter.privacy")}</div>
+      <div className="text-xs text-white/60 mt-6 max-w-xs text-center">
+        We respect your privacy. Unsubscribe at any time.
+      </div>
     </motion.section>
   );
 } 
