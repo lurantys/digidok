@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { BookOpen, Brain, Route } from "lucide-react";
 import { AcademicCapIcon, UserGroupIcon, UserIcon, BeakerIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -10,7 +11,7 @@ const features = [
     descKey: "features.articlesDesc"
   },
   {
-    icon: <AcademicCapIcon className="w-8 h-8 text-blue-400" />, // Quiz
+    icon: <Link to="/quiz"><AcademicCapIcon className="w-8 h-8 text-blue-400" /></Link>, // Quiz
     titleKey: "features.quiz",
     descKey: "features.quizDesc"
   },

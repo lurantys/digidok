@@ -10,6 +10,11 @@ import Footer from "./components/Footer/Footer";
 import AuthModal from "./components/AuthModal/AuthModal";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import About from "./pages/About";
+import Pricing from "./pages/Pricing";
+import FAQ from "./pages/FAQ";
+import Quizzes from "./pages/Quizzes";
+import Quiz from "./pages/Quiz";
 
 function AnimatedBackground({ xBlueStyle, yBlueStyle, xGreenStyle, yGreenStyle }) {
   return (
@@ -105,6 +110,11 @@ function AppLayout() {
             </>
           } />
           <Route path="/auth" element={<AuthModal page />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/quizzes" element={<Quizzes />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Routes>
       </div>
       <Footer transparent={showBlobs} separator={showFooterSeparator} />
