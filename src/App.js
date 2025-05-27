@@ -15,6 +15,7 @@ import Pricing from "./pages/Pricing";
 import FAQ from "./pages/FAQ";
 import Quizzes from "./pages/Quizzes";
 import Quiz from "./pages/Quiz";
+import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 
 function AnimatedBackground({ xBlueStyle, yBlueStyle, xGreenStyle, yGreenStyle }) {
   return (
@@ -54,6 +55,18 @@ function AnimatedBackground({ xBlueStyle, yBlueStyle, xGreenStyle, yGreenStyle }
         }}
       />
     </>
+  );
+}
+
+function LanguageToggle() {
+  const { language, toggleLanguage } = useLanguage();
+  return (
+    <button
+      onClick={toggleLanguage}
+      className="fixed top-4 right-4 z-50 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+    >
+      {language === 'en' ? 'FR' : 'EN'}
+    </button>
   );
 }
 
@@ -99,6 +112,7 @@ function AppLayout() {
       {showBlobs && (
         <AnimatedBackground xBlueStyle={xBlueStyle} yBlueStyle={yBlueStyle} xGreenStyle={xGreenStyle} yGreenStyle={yGreenStyle} />
       )}
+      <LanguageToggle />
       <Header />
       <div className="space-y-24 relative z-10">
         <Routes>
@@ -124,9 +138,11 @@ function AppLayout() {
 
 function App() {
   return (
-    <Router>
-      <AppLayout />
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <AppLayout />
+      </Router>
+    </LanguageProvider>
   );
 }
 

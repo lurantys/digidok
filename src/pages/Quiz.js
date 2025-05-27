@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const quizQuestions = [
   // Basic Concepts (30% - 4 questions)
@@ -210,6 +211,7 @@ function AnimatedBackground({ xBlueStyle, yBlueStyle, xGreenStyle, yGreenStyle }
 
 export default function Quiz() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5, px: 0, py: 0 });
   const containerRef = useRef(null);
   const x = useMotionValue(window.innerWidth / 2);
@@ -250,10 +252,10 @@ export default function Quiz() {
   // Calculate difficulty level based on score
   const getDifficultyLevel = (score) => {
     const percentage = (score / quizQuestions.length) * 100;
-    if (percentage <= 40) return "Beginner";
-    if (percentage <= 65) return "Intermediate";
-    if (percentage <= 80) return "Advanced";
-    return "Expert";
+    if (percentage <= 40) return t('quiz.difficulty.easy');
+    if (percentage <= 65) return t('quiz.difficulty.medium');
+    if (percentage <= 80) return t('quiz.difficulty.hard');
+    return t('quiz.difficulty.expert');
   };
 
   // Blobs follow cursor in px
@@ -316,10 +318,10 @@ export default function Quiz() {
       return (
         <>
           <h1 className="text-3xl font-heading font-bold text-white mb-6 text-center">
-            AI Healthcare Expertise Assessment
+            {t('quiz.title')}
           </h1>
           <p className="text-white/60 text-center mb-8">
-            Test your knowledge and understanding of AI in healthcare
+            {t('quiz.description')}
           </p>
           
           <div className="space-y-4">
@@ -327,13 +329,13 @@ export default function Quiz() {
               onClick={handleStartQuiz}
               className="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
             >
-              Start Quiz
+              {t('quiz.startQuiz')}
             </button>
             <button
               onClick={() => navigate("/quizzes")}
               className="w-full py-3 px-6 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
             >
-              Back to Quizzes
+              {t('quiz.backToQuizzes')}
             </button>
           </div>
         </>
@@ -345,14 +347,14 @@ export default function Quiz() {
       return (
         <>
           <h1 className="text-3xl font-heading font-bold text-white mb-6 text-center">
-            Quiz Results
+            {t('quiz.results')}
           </h1>
           <div className="text-center mb-8">
             <p className="text-white/60 mb-2">
-              You scored {score} out of {quizQuestions.length}
+              {t('quiz.score')}: {score} {t('quiz.outOf')} {quizQuestions.length}
             </p>
             <p className="text-xl font-semibold text-white">
-              Level: {difficultyLevel}
+              {t('quiz.level')}: {difficultyLevel}
             </p>
           </div>
           <div className="space-y-4">
@@ -360,13 +362,13 @@ export default function Quiz() {
               onClick={handleRestartQuiz}
               className="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
             >
-              Try Again
+              {t('quiz.tryAgain')}
             </button>
             <button
               onClick={() => navigate("/quizzes")}
               className="w-full py-3 px-6 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
             >
-              Back to Quizzes
+              {t('quiz.backToQuizzes')}
             </button>
           </div>
         </>
@@ -378,10 +380,10 @@ export default function Quiz() {
       <>
         <div className="flex justify-between items-center mb-6">
           <div className="text-white/40 text-sm">
-            Question {currentQuestion + 1} of {quizQuestions.length}
+            {t('quiz.question')} {currentQuestion + 1} {t('common.of')} {quizQuestions.length}
           </div>
           <div className="text-white/40 text-sm">
-            Time: {formatTime(timeLeft)}
+            {t('quiz.timeLeft')}: {formatTime(timeLeft)}
           </div>
         </div>
         <div className="mb-8">
@@ -390,7 +392,7 @@ export default function Quiz() {
               {question.question}
             </h2>
             <span className="text-sm text-white/40">
-              {question.difficulty}
+              {t(`quiz.difficulty.${question.difficulty.toLowerCase()}`)}
             </span>
           </div>
           <div className="space-y-3">
@@ -418,7 +420,7 @@ export default function Quiz() {
               : "bg-blue-500 hover:bg-blue-600 text-white"
           }`}
         >
-          {currentQuestion === quizQuestions.length - 1 ? "Finish Quiz" : "Next Question"}
+          {currentQuestion === quizQuestions.length - 1 ? t('quiz.finishQuiz') : t('quiz.nextQuestion')}
         </button>
       </>
     );
@@ -440,7 +442,7 @@ export default function Quiz() {
       <button
         onClick={() => navigate("/quizzes")}
         className="absolute top-6 left-6 text-white/60 hover:text-white text-2xl font-bold z-10"
-        aria-label="Back"
+        aria-label={t('common.back')}
       >
         <ArrowLeftIcon className="w-8 h-8" />
       </button>

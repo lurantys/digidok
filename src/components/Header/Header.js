@@ -1,10 +1,9 @@
-import LanguageToggle from "../LanguageToggle/LanguageToggle";
-import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function Header() {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -28,27 +27,26 @@ export default function Header() {
       <nav className="hidden md:flex gap-8 text-base font-medium text-white/80 absolute left-1/2 -translate-x-1/2">
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }}>
           <Link to="/about" className="hover:text-white transition-colors">
-            About
+            {t("navigation.about")}
           </Link>
         </motion.div>
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }}>
           <Link to="/pricing" className="hover:text-white transition-colors">
-            Pricing
+            {t("navigation.pricing")}
           </Link>
         </motion.div>
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }}>
           <Link to="/faq" className="hover:text-white transition-colors">
-            FAQ
+            {t("navigation.faq")}
           </Link>
         </motion.div>
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }}>
           <Link to="/quizzes" className="hover:text-white transition-colors">
-            Quizzes
+            {t("navigation.quizzes")}
           </Link>
         </motion.div>
       </nav>
       <div className="flex items-center gap-4">
-        <LanguageToggle />
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }} className="inline-block">
           <Link
             to="/auth"
@@ -56,7 +54,7 @@ export default function Header() {
             onClick={handleAuthNav("login")}
             className="px-5 py-2 rounded-md text-white font-semibold hover:bg-white/10 transition-colors"
           >
-            {t("header.login")}
+            {t("auth.login")}
           </Link>
         </motion.div>
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }} className="inline-block">
@@ -66,7 +64,7 @@ export default function Header() {
             onClick={handleAuthNav("signup")}
             className="px-5 py-2 rounded-md bg-white text-black font-semibold hover:bg-gray-200 transition-colors ml-2"
           >
-            {t("header.cta")}
+            {t("auth.signUp")}
           </Link>
         </motion.div>
       </div>
