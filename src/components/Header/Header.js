@@ -43,6 +43,11 @@ export default function Header() {
             Quizzes
           </Link>
         </motion.div>
+        <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }}>
+          <Link to="/flashcards" className="hover:text-white transition-colors">
+            Flashcards
+          </Link>
+        </motion.div>
       </nav>
       <div className="flex items-center gap-4">
         <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }} transition={{ type: 'tween', duration: 0.13 }} className="inline-block">

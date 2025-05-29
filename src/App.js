@@ -15,6 +15,7 @@ import Pricing from "./pages/Pricing";
 import FAQ from "./pages/FAQ";
 import Quizzes from "./pages/Quizzes";
 import Quiz from "./pages/Quiz";
+import Flashcards from "./pages/Flashcards";
 
 function AnimatedBackground({ xBlueStyle, yBlueStyle, xGreenStyle, yGreenStyle }) {
   return (
@@ -115,6 +116,7 @@ function AppLayout() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/quizzes" element={<Quizzes />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/flashcards" element={<Flashcards />} />
         </Routes>
       </div>
       <Footer transparent={showBlobs} separator={showFooterSeparator} />
