@@ -23,6 +23,10 @@ export default function FlashcardContainer() {
     return <DomainSelector domains={flashcardDomains} onSelect={key => setSelectedDomain(flashcardDomains[key])} />;
   }
 
+  const domainIcon = selectedDomain.icon;
+  const domainName = selectedDomain.name;
+  const progress = cards.length > 0 ? `${current + 1} / ${cards.length}` : null;
+
   return (
     <div className="flex flex-col items-center w-full">
       <h1 className="text-3xl font-bold mb-8 text-center">AI in Healthcare Flashcards</h1>
@@ -39,7 +43,13 @@ export default function FlashcardContainer() {
         <div className="flex flex-col items-center justify-center min-h-[60vh] w-full">
           <div className="w-full max-w-md flex flex-col items-center gap-8 bg-white/5 rounded-xl p-8 shadow-lg">
             <ProgressTracker current={current + 1} total={cards.length} />
-            <FlashcardCard question={cards[current].question} answer={cards[current].answer} />
+            <FlashcardCard
+              question={cards[current].question}
+              answer={cards[current].answer}
+              domainIcon={domainIcon}
+              domainName={domainName}
+              progress={progress}
+            />
             <AssessmentButtons onCorrect={() => markResult(true)} onIncorrect={() => markResult(false)} />
           </div>
         </div>

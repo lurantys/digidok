@@ -1,19 +1,52 @@
 import React, { useState } from "react";
 import "./FlashcardCard.css";
+import { Stethoscope, Scan, Syringe, BrainCircuit } from "lucide-react";
 
-export default function FlashcardCard({ question, answer }) {
+const iconMap = {
+  Stethoscope,
+  Scan,
+  Syringe,
+  BrainCircuit
+};
+
+export default function FlashcardCard({ question, answer, domainIcon, domainName, progress }) {
   const [flipped, setFlipped] = useState(false);
+  const LucideIcon = iconMap[domainIcon];
 
   const handleFlip = () => setFlipped(f => !f);
 
   return (
-    <div className={`flashcard ${flipped ? "flipped" : ""}`} onClick={handleFlip}>
+    <div
+      className={`flashcard group ${flipped ? "flipped" : ""} transition-transform duration-200 hover:scale-[1.025] active:scale-[0.98]`}
+      onClick={handleFlip}
+      style={{ width: '100%', maxWidth: 380 }}
+    >
       <div className="flashcard-inner">
-        <div className="flashcard-front flex items-center justify-center p-6 text-black font-semibold text-xl leading-snug select-none">
-          <span>{question}</span>
+        <div className="flashcard-front flex flex-col items-center justify-center p-8 text-black font-semibold text-xl leading-snug select-none relative">
+          <div className="absolute top-4 left-4 flex items-center gap-2 opacity-80">
+            {LucideIcon && <LucideIcon size={22} className="text-blue-600" />}
+            {domainName && <span className="font-medium text-blue-700 text-sm">{domainName}</span>}
+          </div>
+          {progress && (
+            <div className="absolute top-4 right-4 bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-xs font-bold shadow">
+              {progress}
+            </div>
+          )}
+          <span className="mt-6 block text-center text-lg sm:text-xl font-semibold leading-snug">{question}</span>
+          <span className="mt-2 block text-xs text-gray-400">Click to reveal answer</span>
         </div>
-        <div className="flashcard-back flex items-center justify-center p-6 text-gray-800 font-semibold text-xl leading-snug select-none">
-          <span>{answer}</span>
+        <div className="flashcard-back flex flex-col items-center justify-center p-8 text-gray-800 font-semibold text-xl leading-snug select-none relative">
+          <div className="absolute top-4 left-4 flex items-center gap-2 opacity-80">
+            {LucideIcon && <LucideIcon size={22} className="text-blue-600" />}
+            {domainName && <span className="font-medium text-blue-700 text-sm">{domainName}</span>}
+          </div>
+          {progress && (
+            <div className="absolute top-4 right-4 bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-xs font-bold shadow">
+              {progress}
+            </div>
+          )}
+          <span className="mt-6 block text-center text-lg sm:text-xl font-semibold leading-snug">{answer}</span>
+          <span className="mt-2 block text-xs text-gray-400">Click to go back</span>
         </div>
       </div>
     </div>
