@@ -29,7 +29,7 @@ export default function FlashcardContainer() {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <h1 className="text-3xl font-bold mb-8 text-center">AI in Healthcare Flashcards</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center text-softWhite">AI in Healthcare Flashcards</h1>
       {(!sessionActive || current >= cards.length) ? (
         <div className="flex flex-col items-center justify-center min-h-[60vh] w-full">
           <SessionSummary
@@ -41,7 +41,7 @@ export default function FlashcardContainer() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[60vh] w-full">
-          <div className="w-full max-w-md flex flex-col items-center gap-8 bg-white/5 rounded-xl p-8 shadow-lg">
+          <div className="w-full max-w-md flex flex-col items-center gap-8">
             <ProgressTracker current={current + 1} total={cards.length} />
             <FlashcardCard
               question={cards[current].question}

@@ -94,7 +94,7 @@ function AppLayout() {
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="font-sans bg-black text-white min-h-screen relative overflow-hidden"
+      className="font-sans bg-midnightNavy text-softWhite min-h-screen relative overflow-hidden"
       style={{ zIndex: 0 }}
     >
       {showBlobs && (

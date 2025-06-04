@@ -21,8 +21,9 @@
   height: 100%;
   backface-visibility: hidden;
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  border: 1.5px solid #e5e7eb;
+  box-shadow: 0 4px 24px rgba(43,120,228,0.10);
+  border: 1.5px solid #2B78E433;
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,9 +31,9 @@
   padding: 24px;
 }
 .flashcard-front {
-  background: #fff;
+  /* background removed, use Tailwind in JSX */
 }
 .flashcard-back {
   transform: rotateY(180deg);
-  background: #f3f4f6;
+  /* background removed, use Tailwind in JSX */
 } 

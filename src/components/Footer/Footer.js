@@ -18,9 +18,9 @@ export default function Footer({ transparent, separator }) {
   return (
     <>
       {separator && (
-        <div className="w-full h-px bg-white/10 mb-0" />
+        <div className="w-full h-px bg-slateGray/30 mb-0" />
       )}
-      <footer className="w-full bg-black text-white py-10 px-4 flex items-center justify-center text-sm relative z-10">
+      <footer className="w-full bg-midnightNavy text-softWhite py-10 px-4 flex items-center justify-center text-sm relative z-10">
         <div className="text-center w-full">
           © {year} DigiDok. All rights reserved.
         </div>
@@ -33,7 +33,7 @@ export default function Footer({ transparent, separator }) {
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.3 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 z-50 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full shadow-lg backdrop-blur border border-white/20 transition-colors"
+            className="fixed bottom-8 right-8 z-50 bg-digitalBlue/20 hover:bg-digitalBlue/40 text-softWhite p-3 rounded-full shadow-lg backdrop-blur border border-digitalBlue/30 transition-colors"
             aria-label="Back to top"
           >
             <ChevronUpIcon className="w-6 h-6" />

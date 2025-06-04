@@ -4,17 +4,17 @@ import { AcademicCapIcon } from "@heroicons/react/24/outline";
 
 export default function Quizzes() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
+    <div className="min-h-screen flex items-center justify-center bg-midnightNavy">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="text-center max-w-2xl mx-auto px-4"
       >
-        <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
+        <h1 className="text-4xl md:text-5xl font-heading font-bold text-digitalBlue mb-6">
           AI in Healthcare Quizzes
         </h1>
-        <p className="text-xl text-white/80 mb-12">
+        <p className="text-xl text-softWhite/80 mb-12">
           Test your knowledge and track your progress in AI healthcare expertise
         </p>
         
@@ -23,16 +23,16 @@ export default function Quizzes() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-6 flex items-center gap-4 transition-colors"
+              className="bg-digitalBlue/10 hover:bg-digitalBlue/20 border border-digitalBlue/20 rounded-xl p-6 flex items-center gap-4 transition-colors"
             >
-              <div className="bg-blue-500/20 p-3 rounded-lg">
-                <AcademicCapIcon className="w-8 h-8 text-blue-400" />
+              <div className="bg-digitalBlue/20 p-3 rounded-lg">
+                <AcademicCapIcon className="w-8 h-8 text-digitalBlue" />
               </div>
               <div className="text-left">
-                <h3 className="text-xl font-semibold text-white mb-1">
+                <h3 className="text-xl font-semibold text-softWhite mb-1">
                   AI Healthcare Expertise Assessment
                 </h3>
-                <p className="text-white/60">
+                <p className="text-slateGray">
                   Comprehensive quiz to evaluate your understanding of AI in healthcare
                 </p>
               </div>
@@ -43,7 +43,7 @@ export default function Quizzes() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-white/40 text-sm mt-4"
+            className="text-slateGray text-sm mt-4"
           >
             More quizzes coming soon...
           </motion.div>

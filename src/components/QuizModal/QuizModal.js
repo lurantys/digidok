@@ -108,16 +108,16 @@ export default function QuizModal({ isOpen, onClose }) {
   if (isLoading || !shuffledQuestions.length) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-midnightNavy/95 backdrop-blur-sm">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-black border border-white/20 rounded-2xl p-8 w-full max-w-2xl relative"
+        className="bg-midnightNavy border border-digitalBlue/30 rounded-2xl p-8 w-full max-w-2xl relative"
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white/60 hover:text-white"
+          className="absolute top-4 right-4 text-slateGray hover:text-softWhite"
         >
           <XMarkIcon className="w-6 h-6" />
         </button>
@@ -125,19 +125,19 @@ export default function QuizModal({ isOpen, onClose }) {
         {!quizCompleted ? (
           <>
             <div className="flex justify-between items-center mb-6">
-              <div className="text-white/60">
+              <div className="text-slateGray">
                 Question {currentQuestion + 1} of {shuffledQuestions.length}
               </div>
-              <div className="text-white/60">
+              <div className="text-slateGray">
                 Time: {formatTime(timeLeft)}
               </div>
             </div>
 
             <div className="mb-8">
-              <div className="text-sm text-white/60 mb-2">
+              <div className="text-sm text-slateGray mb-2">
                 {shuffledQuestions[currentQuestion].category} • {shuffledQuestions[currentQuestion].difficulty}
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">
+              <h3 className="text-xl font-semibold text-softWhite mb-4">
                 {shuffledQuestions[currentQuestion].question}
               </h3>
               <div className="space-y-3">
@@ -150,9 +150,9 @@ export default function QuizModal({ isOpen, onClose }) {
                     className={`w-full p-4 rounded-lg text-left transition-colors ${
                       selectedAnswer === index
                         ? index === shuffledQuestions[currentQuestion].correctAnswer
-                          ? "bg-green-500/20 border-green-500"
-                          : "bg-red-500/20 border-red-500"
-                        : "bg-white/5 hover:bg-white/10 border-white/10"
+                          ? "bg-digitalBlue/10 border-digitalBlue text-digitalBlue"
+                          : "bg-fuchsiaAccent/10 border-fuchsiaAccent text-fuchsiaAccent"
+                        : "bg-midnightNavy/80 hover:bg-digitalBlue/5 border-digitalBlue/10 text-softWhite"
                     } border`}
                   >
                     {option}
@@ -165,9 +165,9 @@ export default function QuizModal({ isOpen, onClose }) {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 rounded-lg bg-white/5 border border-white/10"
+                className="mb-6 p-4 rounded-lg bg-digitalBlue/10 border border-digitalBlue/20"
               >
-                <p className="text-white/80">
+                <p className="text-softWhite/80">
                   {shuffledQuestions[currentQuestion].explanation}
                 </p>
               </motion.div>
@@ -180,7 +180,7 @@ export default function QuizModal({ isOpen, onClose }) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleNextQuestion}
-                className="w-full py-3 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition-colors"
+                className="w-full py-3 rounded-lg bg-digitalBlue text-softWhite font-semibold hover:bg-tealLightGlow transition-colors"
               >
                 {currentQuestion + 1 === shuffledQuestions.length ? "Finish Quiz" : "Next Question"}
               </motion.button>
@@ -188,30 +188,28 @@ export default function QuizModal({ isOpen, onClose }) {
           </>
         ) : (
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">Quiz Completed!</h2>
+            <h2 className="text-2xl font-bold text-digitalBlue mb-4">Quiz Completed!</h2>
             <div className="mb-6">
-              <div className="text-4xl font-bold text-white mb-2">
+              <div className="text-4xl font-bold text-fuchsiaAccent mb-2">
                 {getExpertiseLevel(score)}
               </div>
-              <p className="text-white/80">
+              <p className="text-softWhite/80">
                 Score: {score} out of {shuffledQuestions.length} ({((score / shuffledQuestions.length) * 100).toFixed(1)}%)
               </p>
             </div>
-            
-            <div className="space-y-4 mb-8">
-              <h3 className="text-lg font-semibold text-white">Category Breakdown</h3>
-              {Object.keys(categoryScores).map(category => (
-                <div key={category} className="text-white/80">
-                  {category}: {getCategoryPercentage(category)}%
-                </div>
-              ))}
-            </div>
-
+            <h3 className="text-lg font-semibold text-digitalBlue">Category Breakdown</h3>
+            {Object.keys(categoryScores).map((category) => (
+              <div key={category} className="text-softWhite/80">
+                {category}: {getCategoryPercentage(category)}%
+              </div>
+            ))}
             <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={onClose}
-              className="px-6 py-3 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition-colors"
+              className="w-full py-3 rounded-lg bg-fuchsiaAccent text-softWhite font-semibold hover:bg-tealLightGlow transition-colors mt-8"
             >
               Close
             </motion.button>

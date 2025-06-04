@@ -80,7 +80,7 @@ export default function AuthModal({ page }) {
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
-        className="min-h-screen flex flex-col items-center justify-center bg-black relative overflow-hidden cursor-pointer"
+        className="min-h-screen flex flex-col items-center justify-center bg-midnightNavy relative overflow-hidden cursor-pointer"
       >
         {/* Animated blobs that follow the mouse */}
         <motion.div
@@ -92,7 +92,7 @@ export default function AuthModal({ page }) {
             y: yBlueStyle,
             width: "24rem",
             height: "24rem",
-            background: "#2563eb",
+            background: "#2B78E4", // digitalBlue
             opacity: 0.18,
             filter: "blur(80px)",
             borderRadius: "50%",
@@ -107,14 +107,14 @@ export default function AuthModal({ page }) {
             y: yGreenStyle,
             width: "18rem",
             height: "18rem",
-            background: "#22c55e",
+            background: "#71D3E3", // tealLightGlow
             opacity: 0.13,
             filter: "blur(70px)",
             borderRadius: "50%",
           }}
         />
         <button
-          className="absolute top-6 left-6 text-white/60 hover:text-white text-2xl font-bold z-10"
+          className="absolute top-6 left-6 text-slateGray hover:text-softWhite text-2xl font-bold z-10"
           onClick={() => navigate("/")}
           aria-label="Back"
         >
@@ -127,16 +127,16 @@ export default function AuthModal({ page }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -40 }}
             transition={{ duration: 0.4, type: "spring" }}
-            className="bg-black/90 border border-white/10 shadow-2xl p-12 w-full max-w-md relative animate-fadeIn mt-10 flex flex-col items-center z-10 rounded-2xl backdrop-blur"
+            className="bg-midnightNavy/95 border border-digitalBlue/20 shadow-2xl p-12 w-full max-w-md relative animate-fadeIn mt-10 flex flex-col items-center z-10 rounded-2xl backdrop-blur"
           >
-            <h2 className="text-3xl font-heading font-bold mb-2 text-center text-white">
+            <h2 className="text-3xl font-heading font-bold mb-2 text-center text-digitalBlue">
               {isSignup ? "Sign Up" : "Log In"}
             </h2>
-            <p className="text-white/60 mb-8 text-center text-base">
+            <p className="text-slateGray mb-8 text-center text-base">
               {isSignup ? "Create your Digidok account" : "Welcome back to Digidok"}
             </p>
             {submitted ? (
-              <div className="text-green-400 font-semibold text-lg text-center mb-4">
+              <div className="text-digitalBlue font-semibold text-lg text-center mb-4">
                 {isSignup ? "Signed up successfully!" : "Logged in successfully!"}
               </div>
             ) : (
@@ -144,7 +144,7 @@ export default function AuthModal({ page }) {
                 {isSignup && (
                   <input
                     type="text"
-                    className="px-4 py-3 rounded-md border border-white/20 bg-black text-white placeholder-white/40 focus:border-blue-500 focus:ring-2 focus:ring-blue-900 outline-none text-base"
+                    className="px-4 py-3 rounded-md border border-digitalBlue/20 bg-midnightNavy text-softWhite placeholder-slateGray focus:border-digitalBlue focus:ring-2 focus:ring-digitalBlue outline-none text-base"
                     placeholder="Full Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -154,7 +154,7 @@ export default function AuthModal({ page }) {
                 )}
                 <input
                   type="email"
-                  className="px-4 py-3 rounded-md border border-white/20 bg-black text-white placeholder-white/40 focus:border-blue-500 focus:ring-2 focus:ring-blue-900 outline-none text-base"
+                  className="px-4 py-3 rounded-md border border-digitalBlue/20 bg-midnightNavy text-softWhite placeholder-slateGray focus:border-digitalBlue focus:ring-2 focus:ring-digitalBlue outline-none text-base"
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -163,34 +163,34 @@ export default function AuthModal({ page }) {
                 />
                 <input
                   type="password"
-                  className="px-4 py-3 rounded-md border border-white/20 bg-black text-white placeholder-white/40 focus:border-blue-500 focus:ring-2 focus:ring-blue-900 outline-none text-base"
+                  className="px-4 py-3 rounded-md border border-digitalBlue/20 bg-midnightNavy text-softWhite placeholder-slateGray focus:border-digitalBlue focus:ring-2 focus:ring-digitalBlue outline-none text-base"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   aria-label="Password"
                 />
-                {error && <div className="text-red-400 text-sm">{error}</div>}
+                {error && <div className="text-fuchsiaAccent text-sm">{error}</div>}
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-md bg-blue-700 text-white font-semibold text-lg hover:bg-blue-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-700 mt-2 shadow"
+                  className="px-6 py-3 rounded-md bg-digitalBlue text-softWhite font-semibold text-lg hover:bg-tealLightGlow transition-colors focus:outline-none focus:ring-2 focus:ring-digitalBlue mt-2 shadow"
                 >
                   {isSignup ? "Sign Up" : "Log In"}
                 </button>
               </form>
             )}
             <div className="w-full flex items-center my-8">
-              <div className="flex-1 h-px bg-white/10" />
-              <span className="px-4 text-white/30 text-xs uppercase tracking-widest">or</span>
-              <div className="flex-1 h-px bg-white/10" />
+              <div className="flex-1 h-px bg-slateGray/30" />
+              <span className="px-4 text-slateGray text-xs uppercase tracking-widest">or</span>
+              <div className="flex-1 h-px bg-slateGray/30" />
             </div>
             <div className="w-full flex flex-col items-center gap-2">
               {isSignup ? (
-                <button className="text-white/60 hover:text-blue-400 text-sm underline" onClick={() => { setMode("login"); setSubmitted(false); setError(""); }}>
+                <button className="text-slateGray hover:text-digitalBlue text-sm underline" onClick={() => { setMode("login"); setSubmitted(false); setError(""); }}>
                   Already have an account? Log in
                 </button>
               ) : (
-                <button className="text-white/60 hover:text-blue-400 text-sm underline" onClick={() => { setMode("signup"); setSubmitted(false); setError(""); }}>
+                <button className="text-slateGray hover:text-digitalBlue text-sm underline" onClick={() => { setMode("signup"); setSubmitted(false); setError(""); }}>
                   Don&apos;t have an account? Sign up
                 </button>
               )}
