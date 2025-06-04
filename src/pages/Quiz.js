@@ -302,15 +302,15 @@ export default function Quiz() {
   const renderQuizContent = () => {
     if (!quizStarted) {
       return (
-        <div className="text-center">
-          <h1 className="text-4xl font-heading font-bold text-white mb-6">AI in Healthcare Quiz</h1>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+        <div className="flex flex-col items-center justify-center bg-softWhite border border-digitalBlue/20 rounded-2xl shadow-lg p-10 max-w-xl mx-auto">
+          <h1 className="text-4xl font-heading font-bold text-digitalBlue mb-6 text-center">AI in Healthcare Quiz</h1>
+          <p className="text-xl text-slateGray mb-8 max-w-2xl mx-auto text-center">
             Test your knowledge of AI applications in healthcare with our comprehensive quiz.
             You'll have 5 minutes to complete 13 questions covering various aspects of healthcare AI.
           </p>
           <button
             onClick={handleStartQuiz}
-            className="px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+            className="px-8 py-4 bg-fuchsiaAccent text-softWhite font-semibold rounded-lg hover:bg-fuchsiaAccent/80 transition-colors focus:outline-none focus:ring-2 focus:ring-fuchsiaAccent/40"
           >
             Start Quiz
           </button>
@@ -323,23 +323,23 @@ export default function Quiz() {
       const difficultyLevel = getDifficultyLevel(percentage);
 
       return (
-        <div className="text-center">
-          <h2 className="text-3xl font-heading font-bold text-white mb-6">Quiz Results</h2>
-          <div className="space-y-4 text-white/80">
-            <p className="text-xl">Score: {score} out of {quizQuestions.length}</p>
-            <p className="text-xl">Percentage: {percentage.toFixed(1)}%</p>
-            <p className="text-xl">Difficulty Level: {difficultyLevel}</p>
+        <div className="flex flex-col items-center justify-center bg-softWhite border border-digitalBlue/20 rounded-2xl shadow-lg p-10 max-w-xl mx-auto">
+          <h2 className="text-3xl font-heading font-bold text-digitalBlue mb-6 text-center">Quiz Results</h2>
+          <div className="space-y-4 text-slateGray text-center">
+            <p className="text-xl">Score: <span className="text-digitalBlue font-bold">{score}</span> out of {quizQuestions.length}</p>
+            <p className="text-xl">Percentage: <span className="text-digitalBlue font-bold">{percentage.toFixed(1)}%</span></p>
+            <p className="text-xl">Difficulty Level: <span className="text-digitalBlue font-bold">{difficultyLevel}</span></p>
           </div>
-          <div className="mt-8 space-x-4">
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full justify-center">
             <button
               onClick={handleRestartQuiz}
-              className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-6 py-3 bg-fuchsiaAccent text-softWhite font-semibold rounded-lg hover:bg-fuchsiaAccent/80 transition-colors focus:outline-none focus:ring-2 focus:ring-fuchsiaAccent/40"
             >
               Try Again
             </button>
             <button
               onClick={() => navigate("/")}
-              className="px-6 py-3 bg-transparent text-white font-semibold rounded-lg border border-white hover:bg-white/10 transition-colors"
+              className="px-6 py-3 bg-white text-digitalBlue font-semibold rounded-lg border border-digitalBlue/20 hover:bg-digitalBlue/10 transition-colors focus:outline-none focus:ring-2 focus:ring-digitalBlue/40"
             >
               Back to Home
             </button>
@@ -353,28 +353,28 @@ export default function Quiz() {
     return (
       <div className="max-w-3xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <div className="text-white/60">
+          <div className="text-slateGray">
             Question {currentQuestion + 1} of {quizQuestions.length}
           </div>
-          <div className="text-white/60">
-            Time Left: {formatTime(timeLeft)}
+          <div className="text-slateGray">
+            Time Left: <span className="font-semibold">{formatTime(timeLeft)}</span>
           </div>
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-xl p-8 backdrop-blur">
-          <h3 className="text-xl font-semibold text-white mb-6">{question.question}</h3>
+        <div className="bg-softWhite border border-digitalBlue/20 rounded-2xl shadow-lg p-8 backdrop-blur">
+          <h3 className="text-xl font-semibold text-digitalBlue mb-6 text-center">{question.question}</h3>
           <div className="space-y-4">
             {question.options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
-                className={`w-full p-4 text-left rounded-lg border transition-colors ${
+                className={`w-full p-4 text-left rounded-lg border font-medium transition-colors text-slateGray border-digitalBlue/20 bg-white hover:bg-digitalBlue/10 focus:outline-none focus:ring-2 focus:ring-digitalBlue/40 ${
                   selectedAnswer === index
-                    ? "bg-white/10 border-white/30"
-                    : "border-white/10 hover:bg-white/5"
+                    ? "bg-digitalBlue/10 text-digitalBlue border-digitalBlue"
+                    : ""
                 }`}
               >
-                <span className="text-white/80">{option}</span>
+                {option}
               </button>
             ))}
           </div>
@@ -383,18 +383,18 @@ export default function Quiz() {
         <div className="mt-8 flex justify-between items-center">
           <button
             onClick={() => navigate("/")}
-            className="text-white/60 hover:text-white flex items-center gap-2"
+            className="flex items-center gap-2 text-digitalBlue font-semibold hover:text-fuchsiaAccent transition-colors"
           >
-            <ArrowLeftIcon className="w-5 h-5" />
+            <ArrowLeftIcon className="w-5 h-5 text-digitalBlue" />
             Back to Home
           </button>
           <button
             onClick={handleNextQuestion}
             disabled={selectedAnswer === null}
-            className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+            className={`px-6 py-3 rounded-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-fuchsiaAccent/40 ${
               selectedAnswer === null
-                ? "bg-white/10 text-white/40 cursor-not-allowed"
-                : "bg-white text-black hover:bg-gray-200"
+                ? "bg-fuchsiaAccent/20 text-softWhite/40 cursor-not-allowed"
+                : "bg-fuchsiaAccent text-softWhite hover:bg-fuchsiaAccent/80"
             }`}
           >
             {currentQuestion === quizQuestions.length - 1 ? "Finish Quiz" : "Next Question"}
@@ -408,7 +408,7 @@ export default function Quiz() {
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="min-h-screen bg-black relative overflow-hidden"
+      className="min-h-screen bg-midnightNavy relative overflow-hidden"
     >
       <AnimatedBackground
         xBlueStyle={useTransform(x, v => `${v - 304}px`)}
