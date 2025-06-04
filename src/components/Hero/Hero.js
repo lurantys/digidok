@@ -5,13 +5,6 @@ import { Link } from "react-router-dom";
 export default function Hero() {
   return (
     <section className="w-full flex flex-col items-center justify-center text-center py-28 px-4 bg-midnightNavy relative overflow-hidden">
-      {/* Blended, very transparent background gif */}
-      <img
-        src="./holder2.gif"
-        alt="Background animation"
-        className="absolute inset-0 w-full h-full object-cover opacity-10 z-0 pointer-events-none select-none"
-        style={{ objectPosition: 'center' }}
-      />
       <div className="flex flex-col items-center justify-center w-full z-10">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

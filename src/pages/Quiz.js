@@ -410,12 +410,6 @@ export default function Quiz() {
       onMouseMove={handleMouseMove}
       className="min-h-screen bg-midnightNavy relative overflow-hidden"
     >
-      <AnimatedBackground
-        xBlueStyle={useTransform(x, v => `${v - 304}px`)}
-        yBlueStyle={useTransform(y, v => `${v - 304}px`)}
-        xGreenStyle={useTransform(xGreen, v => `${v - 240}px`)}
-        yGreenStyle={useTransform(yGreen, v => `${v - 240}px`)}
-      />
       <div className="relative z-10 container mx-auto px-4 py-16">
         {renderQuizContent()}
       </div>
